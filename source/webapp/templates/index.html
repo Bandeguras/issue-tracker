@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Issue Tracker <i class="bi bi-bookmark-check"></i></h1>
+
+    {% for task in tasks %}
+            <div class="border border-4 border-dark rounded p-4 " style="background-color: aqua">
+            <div class="d-flex">
+                <h2>{{ task.summary }} </h2>
+            </div>
+            <p style="font-weight: bold">Type: {{ task.type.name  }}</p>
+            <p style="font-weight: bold">Status: {{ task.status.name }}</p>
+            </div><br/>
+    {% endfor %}<br/>
+
+{% endblock %}
