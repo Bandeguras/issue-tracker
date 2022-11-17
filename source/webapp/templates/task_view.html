@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div style="font-weight: bold " class="border border-4 border-dark p-4">
+        <h1>Summary: {{ task.summary }}</h1>
+        <p>Description: {{ task.description }}</p>
+        <p>Status: {{ task.status.name }}</p>
+        <p>Type: {{ task.type.name }}</p>
+    </div>
+{% endblock %}
