@@ -71,3 +71,14 @@ class TaskUpdate(RedirectView):
             return redirect('index')
         else:
             return render(request, 'task_update.html', {'form': form})
+
+
+class TaskDelete(RedirectView):
+    def get(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs.get('pk'))
+        return render(request, 'task_delete.html', {'task': task})
+
+    def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs.get('pk'))
+        task.delete()
+        return redirect('index')
