@@ -11,9 +11,13 @@ from webapp.form import TaskForm
 class IndexViews(View):
     def get(self, request, *args, **kwargs):
         tasks = Task.objects.all()
-        context = {
-            'tasks': tasks,
-        }
+        search_task = self.request.GET.get('search')
+        print(search_task)
+        if search_task:
+            tasks = Task.objects.all().filter(summary=search_task)
+            context = {'task': tasks}
+            return render(request, 'index.html', context)
+        context = {'tasks': tasks}
         return render(request, 'index.html', context)
 
 

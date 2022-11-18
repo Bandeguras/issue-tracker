@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
+{% block nav %}
+    <li class="nav-item">
+          <a class="nav-link active" href="{% url 'create' %}">Create Task</a>
+    </li>
+{% endblock %}
+
 {% block content %}
 <h1>Issue Tracker <i class="bi bi-bookmark-check"></i></h1>
 
     {% for task in tasks %}
             <div class="border border-4 border-dark rounded p-4 " style="background-color: aqua">
             <div class="d-flex">
-                <h2>{{ task.summary }} </h2>
+                <h2><a href="{% url 'task' task.pk %}" style="text-decoration: none">{{ task.summary }} </a></h2>
+                <a href="{% url "update" task.pk%}"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+                <a href="{% url "delete" task.pk %}"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
             </div>
-            <p style="font-weight: bold">Type: {{ task.type.name  }}</p>
+            <p style="font-weight: bold ">Type: {{ task.type.name  }}</p>
             <p style="font-weight: bold">Status: {{ task.status.name }}</p>
             </div><br/>
     {% endfor %}<br/>
