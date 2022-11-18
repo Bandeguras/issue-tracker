@@ -45,3 +45,29 @@ class TaskCreate(RedirectView):
             return redirect('index')
         else:
             return render(request, "task_create.html", {'form': form})
+
+
+class TaskUpdate(RedirectView):
+
+    def get(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs.get('pk'))
+        form = TaskForm(initial={
+            'summary': task.summary,
+            'description': task.description,
+            'status': task.status,
+            'type': task.type,
+        })
+        return render(request, 'task_update.html', {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs.get('pk'))
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            task.summary = form.cleaned_data.get('summary')
+            task.description = form.cleaned_data.get('description')
+            task.status = form.cleaned_data.get('status')
+            task.type = form.cleaned_data.get('type')
+            task.save()
+            return redirect('index')
+        else:
+            return render(request, 'task_update.html', {'form': form})
