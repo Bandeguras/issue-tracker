@@ -4,6 +4,10 @@
         <h1>Summary: {{ task.summary }}</h1>
         <p>Description: {{ task.description }}</p>
         <p>Status: {{ task.status.name }}</p>
-        <p>Type: {{ task.type.name }}</p>
+        <p>Type: {% for type in task.type.all%}
+            {{type.name }}
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        </p>
     </div>
 {% endblock %}

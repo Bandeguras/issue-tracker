@@ -15,7 +15,10 @@
                 <a href="{% url "update" task.pk%}"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
                 <a href="{% url "delete" task.pk %}"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
             </div>
-            <p style="font-weight: bold ">Type: {{ task.type.name  }}</p>
+            <p style="font-weight: bold ">Type: {% for type in task.type.all%}
+            {{type.name }}
+            {% if not forloop.last %}, {% endif %}
+            {% endfor %}</p>
             <p style="font-weight: bold">Status: {{ task.status.name }}</p>
             </div><br/>
     {% endfor %}<br/>

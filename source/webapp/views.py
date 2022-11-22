@@ -8,7 +8,7 @@ from webapp.form import TaskForm
 # Create your views here.
 
 
-class IndexViews(View):
+class IndexViews(TemplateView):
     def get(self, request, *args, **kwargs):
         tasks = Task.objects.all()
         search_task = self.request.GET.get('search')
@@ -30,7 +30,7 @@ class TaskView(TemplateView):
         return context
 
 
-class TaskCreate(RedirectView):
+class TaskCreate(TemplateView):
     def get(self, request, *args, **kwargs):
         if request.method == 'GET':
             form = TaskForm()
@@ -39,19 +39,15 @@ class TaskCreate(RedirectView):
     def post(self, request, *args, **kwargs):
         form = TaskForm(data=request.POST)
         if form.is_valid():
-            new_task = Task.objects.create(
-                summary=form.cleaned_data['summary'],
-                description=form.cleaned_data['description'],
-                status=form.cleaned_data['status'],
-                type=form.cleaned_data['type']
-
-            )
-            return redirect('index')
+            types = form.cleaned_data.pop('type')
+            new_task = Task.objects.create(**form.cleaned_data)
+            new_task.type.set(types)
+            return redirect('task', pk=new_task.pk)
         else:
             return render(request, "task_create.html", {'form': form})
 
 
-class TaskUpdate(RedirectView):
+class TaskUpdate(TemplateView):
 
     def get(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs.get('pk'))
@@ -59,7 +55,7 @@ class TaskUpdate(RedirectView):
             'summary': task.summary,
             'description': task.description,
             'status': task.status,
-            'type': task.type,
+            'type': task.type.all(),
         })
         return render(request, 'task_update.html', {'form': form})
 
@@ -70,14 +66,14 @@ class TaskUpdate(RedirectView):
             task.summary = form.cleaned_data.get('summary')
             task.description = form.cleaned_data.get('description')
             task.status = form.cleaned_data.get('status')
-            task.type = form.cleaned_data.get('type')
             task.save()
-            return redirect('index')
+            task.type.set(form.cleaned_data['type'])
+            return redirect('task', pk=task.pk)
         else:
             return render(request, 'task_update.html', {'form': form})
 
 
-class TaskDelete(RedirectView):
+class TaskDelete(TemplateView):
     def get(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs.get('pk'))
         return render(request, 'task_delete.html', {'task': task})
