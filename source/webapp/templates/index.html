@@ -3,6 +3,14 @@
     <li class="nav-item">
           <a class="nav-link active" href="{% url 'create' %}">Create Task</a>
     </li>
+
+{% endblock %}
+
+{% block search %}
+<form class="d-flex" role="search ms-auto">
+    {{ form.search }}
+    <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+</form>
 {% endblock %}
 
 {% block content %}
