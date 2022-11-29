@@ -1,0 +1,22 @@
+1-zapros
+from webapp.models import Task,Type,Status
+from django.db.models import Q
+from django.utils import timezone
+from datetime import timedelta
+
+delta = timedelta(days=30)
+delta1 = timezone.now() - delta
+Task.objects.filter(updated_at__gte = delta1, status__name='Done')
+
+2-zapros
+type_bug = Q(type__name='Bug')
+summary_bug = Q(summary__icontains='bug')
+status = Q(status__name='Done')
+Task.objects.filter(summary_bug | type_bug).exclude(status).distinct()
+
+3-zapros
+status1 = Q(status__name ='New')
+status2 = Q(status__name ='In Progress')
+type1 = Q(type__name ='Task')
+type2 = Q(type__name ='Enhancement')
+Task.objects.filter(status1 | status2 & type1 | type2).distinct()
