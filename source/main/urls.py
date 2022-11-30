@@ -10,7 +10,7 @@ Class-based views
     1. Add an import:  from other_app.views import Home
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
-    1. Import the include() function: from django.urls import include, path
+    1. Import the include function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
@@ -20,9 +20,9 @@ from webapp.views import IndexViews, TaskView, TaskCreate, TaskUpdate, TaskDelet
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexViews.as_view(), name='index'),
-    path('task/<int:pk>', TaskView.as_view(), name='task'),
-    path('task/create', TaskCreate.as_view(), name='create'),
-    path('task/update/<int:pk>', TaskUpdate.as_view(), name='update'),
-    path('task/delete/<int:pk>', TaskDelete.as_view(), name='delete'),
+    path('task/<int:pk>/', TaskView.as_view(), name='task'),
+    path('task/create/', TaskCreate.as_view(), name='create'),
+    path('task/update/<int:pk>/', TaskUpdate.as_view(), name='update'),
+    path('task/delete/<int:pk>/', TaskDelete.as_view(), name='delete'),
 
 ]

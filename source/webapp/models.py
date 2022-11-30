@@ -1,8 +1,5 @@
 from django.db import models
 
-TYPES_CHOICES = [('Task', 'задача'), ('Bug', 'ошибка'), ('Enhancement', 'улучшение')]
-CATEGORY_CHOICES = [('New', 'новый'), ('In Progress', 'в процессе'), ('Done', 'выполнено')]
-
 
 # Create your models here.
 class Task(models.Model):
@@ -15,14 +12,14 @@ class Task(models.Model):
 
 
 class Type(models.Model):
-    name = models.CharField(max_length=30, choices=TYPES_CHOICES, verbose_name="Типы")
+    name = models.CharField(max_length=30, verbose_name="Типы")
 
     def __str__(self):
         return f'{self.name}'
 
 
 class Status(models.Model):
-    name = models.CharField(max_length=30, choices=CATEGORY_CHOICES, verbose_name="Статус")
+    name = models.CharField(max_length=30, verbose_name="Статус")
 
     def __str__(self):
         return f'{self.name}'

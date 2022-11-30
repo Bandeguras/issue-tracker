@@ -8,7 +8,7 @@
         <h2>{{ task.summary }}</h2>
         <p>{{ task.description }}</p>
         {% csrf_token %}
-        <input class="btn" style="border:solid 2px black" type="submit" value="Да" >
-        <a style="border:solid 2px black" href="{% url "index" %}" class="p-2 rounded text-decoration-none link-dark">Нет</a>
+        <input class="btn" style="border:solid 2px black" type="submit" value="Yes" >
+        <a style="border:solid 2px black" href="{% url "index" %}" class="btn rounded text-decoration-none link-dark">No</a>
     </form>
 {% endblock %}
