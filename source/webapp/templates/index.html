@@ -14,23 +14,26 @@
 {% endblock %}
 
 {% block content %}
-<h1>Issue Tracker <i class="bi bi-bookmark-check"></i></h1>
-<div class="row">
-{% for task in tasks %}
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body" style="font-weight: bold">
-        <h2><a href="{% url 'task' task.pk %}" style="text-decoration: none">{{ task.summary }} </a></h2>
-        <p>Type: {% for type in task.type.all%}
-            {{type.name }}
-            {% if not forloop.last %}, {% endif %}
-            {% endfor %}</p>
-        <p>Status: {{ task.status.name }}</p>
-          <a href="{% url 'update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
-          <a href="{% url 'delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+    <h1 style="text-align: center">Issue Tracker <i class="bi bi-bookmark-check"></i></h1>
+    <div class="row">
+    {% for task in tasks %}
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body" style="font-weight: bold">
+            <h2><a href="{% url 'task' task.pk %}" style="text-decoration: none">{{ task.summary }} </a></h2>
+            <p>Type: {% for type in task.type.all%}
+                {{type.name }}
+                {% if not forloop.last %}, {% endif %}
+                {% endfor %}</p>
+            <p>Status: {{ task.status.name }}</p>
+              <a href="{% url 'update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+              <a href="{% url 'delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+          </div>
+        </div>
       </div>
+    {% endfor %}
     </div>
-  </div>
-{% endfor %}
-</div>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}
