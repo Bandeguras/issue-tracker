@@ -11,20 +11,20 @@
         </li>
     {% else %}
         <li class="page-item ">
-            <a class="page-link" href="?page=1">First</a>
+            <a class="page-link" href="?{% if query %}{{ query }}&{% endif %}page=1">First</a>
         </li>
         <li class="page-item ">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <a class="page-link" href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="page-item"><a class="page-link"
-        href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+        href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
         </li>
     {% endif %}
 
     <li class="page-item"><a class="page-link"
-        href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+        href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.number }}">{{ page_obj.number }}</a>
     </li>
 
     {% if not page_obj.has_next %}
@@ -39,17 +39,17 @@
         </li>
     {% else %}
         <li class="page-item"><a class="page-link"
-        href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+        href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
         </li>
 
         <li class="page-item ">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <a class="page-link" href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
 
         <li class="page-item ">
-            <a class="page-link" href="?page={{ paginator.num_pages }}">End</a>
+            <a class="page-link" href="?{% if query %}{{ query }}&{% endif %}page={{ paginator.num_pages }}">End</a>
         </li>
     {% endif %}
 
