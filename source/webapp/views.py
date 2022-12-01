@@ -1,21 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from webapp.models import Task
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView
 from webapp.form import TaskForm, SearchForm
 
 
 # Create your views here.
 
 
-class IndexViews(TemplateView):
-    def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
-        form = SearchForm(data=request.GET)
-        if form.is_valid():
-            summary = form.cleaned_data['search']
-            if summary:
-                tasks = tasks.filter(summary__icontains=summary)
-        return render(request, 'index.html', {'tasks': tasks, 'form': form})
+class IndexViews(ListView):
+    template_name = 'index.html'
+    context_object_name = 'tasks'
+
+    def get_queryset(self):
+        return Task.objects.all().order_by('-created_at')
 
 
 class TaskView(TemplateView):
