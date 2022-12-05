@@ -8,8 +8,8 @@ class Task(models.Model):
     description = models.TextField(max_length=3000, verbose_name="Описание", null=True, blank=True)
     status = models.ForeignKey('webapp.Status', on_delete=models.PROTECT, related_name='statuses')
     type = models.ManyToManyField('webapp.Type', related_name='types')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата начала")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата окончания")
     project = models.ForeignKey('webapp.Project', on_delete=models.PROTECT, related_name='projects')
 
     def get_absolute_url(self):
