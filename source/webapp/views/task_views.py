@@ -9,7 +9,7 @@ from webapp.form import TaskForm, SearchForm
 # Create your views here.
 
 
-class IndexViews(ListView):
+class TaskIndex(ListView):
     template_name = 'task/index.html'
     context_object_name = 'tasks'
     model = Task
