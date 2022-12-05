@@ -1,8 +1,8 @@
 from django.db.models import Q
 from django.utils.http import urlencode
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from webapp.models import Task
-from django.views.generic import TemplateView, FormView, ListView
+from webapp.models import Task, Project
+from django.views.generic import TemplateView, FormView, ListView, CreateView
 from webapp.form import TaskForm, SearchForm
 
 
@@ -53,18 +53,18 @@ class TaskView(TemplateView):
         return context
 
 
-class TaskCreate(FormView):
+class TaskCreate(CreateView):
     template_name = 'task/task_create.html'
+    model = Task
     form_class = TaskForm
 
-    def form_valid(self, form):
-        types = form.cleaned_data.pop('type')
-        self.task = Task.objects.create(**form.cleaned_data)
-        self.task.type.set(types)
-        return super().form_valid(form)
-
     def get_success_url(self):
-        return reverse('task', kwargs={'pk': self.task.pk})
+        return reverse('project', kwargs={'pk': self.object.project.pk})
+
+    def form_valid(self, form):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        form.instance.project = project
+        return super().form_valid(form)
 
 
 class TaskUpdate(FormView):

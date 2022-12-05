@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'task_create'  project.pk %}">Create Task</a>
+    </li>
+
+{% endblock %}
 {% block content %}
     <div style="font-weight: bold " class="border border-4 border-dark p-4">
         <h1>Summary: {{ project.summary }}</h1>

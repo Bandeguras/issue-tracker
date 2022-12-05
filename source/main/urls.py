@@ -21,8 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ProjectIndex.as_view(), name='index'),
     path('project/<int:pk>/', ProjectView.as_view(), name='project'),
+    path('project/<int:pk>/create/task/', TaskCreate.as_view(), name='task_create'),
     path('task/<int:pk>/', TaskView.as_view(), name='task'),
-    path('task/create/', TaskCreate.as_view(), name='create'),
     path('task/update/<int:pk>/', TaskUpdate.as_view(), name='update'),
     path('task/delete/<int:pk>/', TaskDelete.as_view(), name='delete'),
 
