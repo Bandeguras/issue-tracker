@@ -2,18 +2,18 @@
 
 
 {% block content %}
-    <h1 style="text-align: center">Issue Tracker <i class="bi bi-bookmark-check"></i></h1>
+    <h1 style="text-align: center">Project Tracker <i class="bi bi-bookmark-check"></i></h1>
     <div class="row">
     {% for project in projects %}
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body" style="font-weight: bold">
-            <h2>{{project.summary }} </h2>
-
+             <h2><a href="{{ project.get_absolute_url }}" style="text-decoration: none">{{ project.summary }} </a></h2>
+            <p>{{ project.description }}</p>
+              <a href=""></a>
           </div>
         </div>
       </div>
     {% endfor %}
     </div>
-
 {% endblock %}

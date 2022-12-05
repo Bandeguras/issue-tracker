@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div style="font-weight: bold " class="border border-4 border-dark p-4">
+        <h1>Summary: {{ project.summary }}</h1>
+        <p>Description: {{ project.description }}</p>
+        <p>Created-At: {{ project.created_at }}</p>
+        <p>Expiration_at: {{ project.expiration_at }}</p>
+        <h2 style="text-align: center">Tasks</h2>
+        <div class="row">
+            {% for task in project.projects.all %}
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body" style="font-weight: bold">
+                    <h2><a href="{{ task.get_absolute_url }}" style="text-decoration: none">{{ task.summary }} </a></h2>
+                    <p>Type: {% for type in task.type.all%}
+                        {{type.name }}
+                        {% if not forloop.last %}, {% endif %}
+                        {% endfor %}</p>
+                    <p>Status: {{ task.status.name }}</p>
+                      <a href="{% url 'update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+                      <a href="{% url 'delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,11 +1,17 @@
 from django import forms
-from webapp.models import Task
+from webapp.models import Task, Project
 from django.forms import widgets, ValidationError
 
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=50, required=False, label="Search")
 
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['summary', 'description', 'created_at', 'expiration_at']
+        widgets = {'created_at': widgets.SelectDateWidget, 'expiration_at': widgets.SelectDateWidget}
 
 class TaskForm(forms.ModelForm):
     class Meta:
