@@ -10,7 +10,7 @@ from webapp.form import TaskForm, SearchForm
 
 
 class IndexViews(ListView):
-    template_name = 'index.html'
+    template_name = 'task/index.html'
     context_object_name = 'tasks'
     model = Task
     ordering = ['-created_at']
@@ -45,7 +45,7 @@ class IndexViews(ListView):
 
 
 class TaskView(TemplateView):
-    template_name = 'task_view.html'
+    template_name = 'task/task_view.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -54,7 +54,7 @@ class TaskView(TemplateView):
 
 
 class TaskCreate(FormView):
-    template_name = 'task_create.html'
+    template_name = 'task/task_create.html'
     form_class = TaskForm
 
     def form_valid(self, form):
@@ -68,7 +68,7 @@ class TaskCreate(FormView):
 
 
 class TaskUpdate(FormView):
-    template_name = 'task_update.html'
+    template_name = 'task/task_update.html'
     form_class = TaskForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -107,7 +107,7 @@ class TaskUpdate(FormView):
 class TaskDelete(TemplateView):
     def get(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs.get('pk'))
-        return render(request, 'task_delete.html', {'task': task})
+        return render(request, 'task/task_delete.html', {'task': task})
 
     def post(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs.get('pk'))
