@@ -1,5 +1,5 @@
 from django.contrib import admin
-from webapp.models import Task, Status, Type
+from webapp.models import Task, Status, Type, Project
 # Register your models here.
 
 class TYPE_STATUS_ADMIN(admin.ModelAdmin):
@@ -7,6 +7,8 @@ class TYPE_STATUS_ADMIN(admin.ModelAdmin):
 class TASK_ADMIN(admin.ModelAdmin):
     list_display = ['summary']
 
+
+admin.site.register(Project, TASK_ADMIN)
 admin.site.register(Task, TASK_ADMIN)
 admin.site.register(Status, TYPE_STATUS_ADMIN)
 admin.site.register(Type, TYPE_STATUS_ADMIN)
