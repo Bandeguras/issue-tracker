@@ -19,14 +19,14 @@ class Task(models.Model):
 class Type(models.Model):
     name = models.CharField(max_length=30, verbose_name="Типы")
 
-    def str(self):
+    def __str__(self):
         return f'{self.name}'
 
 
 class Status(models.Model):
     name = models.CharField(max_length=30, verbose_name="Статус")
 
-    def str(self):
+    def __str__(self):
         return f'{self.name}'
 
 

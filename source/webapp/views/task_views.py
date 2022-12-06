@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.utils.http import urlencode
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from webapp.models import Task, Project
-from django.views.generic import TemplateView, FormView, ListView, CreateView
+from django.views.generic import TemplateView, FormView, ListView, CreateView, DetailView
 from webapp.form import TaskForm, SearchForm
 
 
@@ -44,13 +44,9 @@ class TaskIndex(ListView):
         return context
 
 
-class TaskView(TemplateView):
+class TaskView(DetailView):
     template_name = 'task/task_view.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['task'] = get_object_or_404(Task, pk=kwargs.get('pk'))
-        return context
+    model = Task
 
 
 class TaskCreate(CreateView):

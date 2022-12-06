@@ -12,7 +12,6 @@ class ProjectIndex(ListView):
 class ProjectView(DetailView):
     template_name = 'project/project_view.html'
     model = Project
-    form_class = ProjectForm
 
 
 
