@@ -1,6 +1,6 @@
 from webapp.models import Project
 from webapp.form import ProjectForm
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 
 class ProjectIndex(ListView):
@@ -14,9 +14,14 @@ class ProjectView(DetailView):
     model = Project
 
 
-
-
 class ProjectCreate(CreateView):
     template_name = 'project/project_create.html'
     model = Project
     form_class = ProjectForm
+
+
+class ProjectUpdate(UpdateView):
+    model = Project
+    template_name = 'project/project_update.html'
+    form_class = ProjectForm
+    context_object_name = "projects"
