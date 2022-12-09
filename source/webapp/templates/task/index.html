@@ -21,8 +21,8 @@
                 {% if not forloop.last %}, {% endif %}
                 {% endfor %}</p>
             <p>Status: {{ task.status.name }}</p>
-              <a href="{% url 'update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
-              <a href="{% url 'delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+              <a href="{% url 'task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+              <a href="{% url 'task_delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
           </div>
         </div>
       </div>

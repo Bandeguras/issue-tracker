@@ -1,6 +1,8 @@
+from django.urls import reverse_lazy
+
 from webapp.models import Project
 from webapp.form import ProjectForm
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 class ProjectIndex(ListView):
@@ -25,3 +27,10 @@ class ProjectUpdate(UpdateView):
     template_name = 'project/project_update.html'
     form_class = ProjectForm
     context_object_name = "projects"
+
+
+class ProjectDelete(DeleteView):
+    template_name = 'project/project_delete.html'
+    model = Project
+    context_object_name = "project"
+    success_url = reverse_lazy('project_index')

@@ -10,7 +10,7 @@ class Task(models.Model):
     type = models.ManyToManyField('webapp.Type', related_name='types')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата начала")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата окончания")
-    project = models.ForeignKey('webapp.Project', on_delete=models.PROTECT, related_name='projects')
+    project = models.ForeignKey('webapp.Project', on_delete=models.CASCADE, related_name='projects')
 
     def get_absolute_url(self):
         return reverse('task', kwargs={'pk': self.pk})
