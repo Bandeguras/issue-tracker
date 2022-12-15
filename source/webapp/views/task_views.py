@@ -1,5 +1,4 @@
 from django.db.models import Q
-from django.urls import reverse_lazy
 from django.utils.http import urlencode
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from webapp.models import Task, Project
@@ -56,7 +55,7 @@ class TaskCreate(CreateView):
     form_class = TaskForm
 
     def get_success_url(self):
-        return reverse('project', kwargs={'pk': self.object.project.pk})
+        return reverse('webapp:project', kwargs={'pk': self.object.project.pk})
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
@@ -71,7 +70,7 @@ class TaskUpdate(UpdateView):
     context_object_name = "projects"
 
     def get_success_url(self):
-        return reverse('project', kwargs={'pk': self.object.project.pk})
+        return reverse('webapp:project', kwargs={'pk': self.object.project.pk})
 
 
 class TaskDelete(DeleteView):
@@ -80,4 +79,4 @@ class TaskDelete(DeleteView):
     context_object_name = 'task'
 
     def get_success_url(self):
-        return reverse('project', kwargs={'pk': self.object.project.pk})
+        return reverse('webapp:project', kwargs={'pk': self.object.project.pk})

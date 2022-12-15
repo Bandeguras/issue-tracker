@@ -9,6 +9,6 @@
         <p>Description: {{ project.description }}</p>
         {% csrf_token %}
         <input class="btn" style="border:solid 2px black" type="submit" value="Yes" >
-        <a style="border:solid 2px black" href="{% url "project" project.pk %}" class="btn rounded text-decoration-none link-dark">No</a>
+        <a style="border:solid 2px black" href="{% url "webapp:project" project.pk %}" class="btn rounded text-decoration-none link-dark">No</a>
     </form>
 {% endblock %}

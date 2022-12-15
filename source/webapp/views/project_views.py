@@ -33,4 +33,4 @@ class ProjectDelete(DeleteView):
     template_name = 'project/project_delete.html'
     model = Project
     context_object_name = "project"
-    success_url = reverse_lazy('project_index')
+    success_url = reverse_lazy('webapp:project_index')

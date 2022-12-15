@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block nav %}
     <li class="nav-item">
-        <a class="nav-link active" href="{% url 'task_create'  project.pk %}">Create Task</a>
+        <a class="nav-link active" href="{% url 'webapp:task_create'  project.pk %}">Create Task</a>
     </li>
 
 {% endblock %}
@@ -10,8 +10,8 @@
         <div class="d-flex">
         <h1>Summary: {{ project.summary }}</h1>
             <div class="ms-auto">
-                <a href="{% url 'project_update' project.pk%}"class= "btn btn-primary "><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
-                <a href="{% url 'project_delete' project.pk%}"class= "btn btn-primary "><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+                <a href="{% url 'webapp:project_update' project.pk%}"class= "btn btn-primary "><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+                <a href="{% url 'webapp:project_delete' project.pk%}"class= "btn btn-primary "><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
             </div>
         </div>
         <p>Description: {{ project.description }}</p>
@@ -24,14 +24,14 @@
               <div class="col-sm-6">
                 <div class="card">
                   <div class="card-body" style="font-weight: bold">
-                    <h2><a href="{{ task.get_absolute_url }}" style="text-decoration: none">{{ task.summary }} </a></h2>
+                    <h2><a href="{% url 'webapp:task' task.pk %}" style="text-decoration: none">{{ task.summary }} </a></h2>
                     <p>Type: {% for type in task.type.all%}
                         {{type.name }}
                         {% if not forloop.last %}, {% endif %}
                         {% endfor %}</p>
                     <p>Status: {{ task.status.name }}</p>
-                      <a href="{% url 'task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
-                      <a href="{% url 'task_delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+                      <a href="{% url 'webapp:task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+                      <a href="{% url 'webapp:task_delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
                   </div>
                 </div>
               </div>

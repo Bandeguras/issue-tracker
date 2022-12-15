@@ -15,14 +15,14 @@
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body" style="font-weight: bold">
-            <h2><a href="{% url 'task' task.pk %}" style="text-decoration: none">{{ task.summary }} </a></h2>
+            <h2><a href="{% url 'webapp:task' task.pk %}" style="text-decoration: none">{{ task.summary }} </a></h2>
             <p>Type: {% for type in task.type.all%}
                 {{type.name }}
                 {% if not forloop.last %}, {% endif %}
                 {% endfor %}</p>
             <p>Status: {{ task.status.name }}</p>
-              <a href="{% url 'task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
-              <a href="{% url 'task_delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+              <a href="{% url 'webapp:task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+              <a href="{% url 'webapp:task_delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
           </div>
         </div>
       </div>
