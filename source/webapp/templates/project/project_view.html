@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 {% block nav %}
+    {% if request.user.is_authenticated %}
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'webapp:task_create'  project.pk %}">Create Task</a>
     </li>
-
+    {% endif %}
 {% endblock %}
 {% block content %}
     <div style="font-weight: bold " class="border border-4 border-dark p-4">
         <div class="d-flex">
         <h1>Summary: {{ project.summary }}</h1>
-            <div class="ms-auto">
+            {% if request.user.is_authenticated %}
+                <div class="ms-auto">
                 <a href="{% url 'webapp:project_update' project.pk%}"class= "btn btn-primary "><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
                 <a href="{% url 'webapp:project_delete' project.pk%}"class= "btn btn-primary "><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
-            </div>
+                </div>
+            {% endif %}
         </div>
         <p>Description: {{ project.description }}</p>
         <p>Created-At: {{ project.created_at }}</p>
@@ -30,8 +33,10 @@
                         {% if not forloop.last %}, {% endif %}
                         {% endfor %}</p>
                     <p>Status: {{ task.status.name }}</p>
+                    {% if request.user.is_authenticated %}
                       <a href="{% url 'webapp:task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
                       <a href="{% url 'webapp:task_delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
