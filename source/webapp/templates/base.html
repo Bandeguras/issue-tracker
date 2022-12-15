@@ -29,7 +29,7 @@
                         <p>Hi, {{ request.user.username  }}</p>
                   </li>
                   <li class="nav-item d-flex">
-                        <p><a class="nav-link active" href="{% url 'accounts:login' %}">Logout</a></p>
+                        <p><a class="nav-link active" href="{% url 'accounts:logout' %}">Logout</a></p>
                   </li>
               {% else %}
                   <li class="nav-item d-flex">
