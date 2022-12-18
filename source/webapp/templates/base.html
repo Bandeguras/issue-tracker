@@ -28,9 +28,11 @@
 
             {% if request.user.is_authenticated %}
                     <p class="ms-auto text-secondary d-inline-block my-0 py-auto" >Hi, {{ request.user.username }}</p>
-                    <a class="btn btn-dark ms-2" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Выйти</a>
+                    <a class="btn btn-dark ms-2" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a>
             {% else %}
-                    <a class="btn btn-dark ms-auto" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Войти</a>
+                    <a class="btn btn-dark ms-auto" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a>
+                    <a class="btn btn-dark ms-2" href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign in</a>
+
             {% endif %}
         </div>
     </div>
