@@ -13,7 +13,7 @@ class Task(models.Model):
     project = models.ForeignKey('webapp.Project', on_delete=models.CASCADE, related_name='projects')
 
     def get_absolute_url(self):
-        return reverse('task', kwargs={'pk': self.pk})
+        return reverse('webapp:task', kwargs={'pk': self.pk})
 
 
 class Type(models.Model):
@@ -37,4 +37,4 @@ class Project(models.Model):
     description = models.TextField(max_length=3000, verbose_name="Описание")
 
     def get_absolute_url(self):
-        return reverse('project', kwargs={'pk': self.pk})
+        return reverse('webapp:project', kwargs={'pk': self.pk})
