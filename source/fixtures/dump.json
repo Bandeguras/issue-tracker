@@ -109,7 +109,11 @@
         "expiration_at": null,
         "summary": "Telegram",
         "description": "AIOASJDFNASMFNASFASF",
-        "author": []
+        "author": [
+            3,
+            4,
+            6
+        ]
     }
 },
 {
