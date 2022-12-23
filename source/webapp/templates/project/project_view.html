@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 {% block nav %}
     {% if request.user.is_authenticated %}
-    {% if perms.auth.add_user and request.user in project.author.all %}
+
+    {% if perms.webapp.add_task and request.user in project.author.all %}
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'webapp:task_create'  project.pk %}">Create Task</a>
     </li>
+    {% endif %}
+
+    {% if perms.auth.add_user and request.user in project.author.all %}
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'accounts:user_add'  project.pk %}">Add developer+</a>
     </li>
     {% endif %}
+
     {% endif %}
 {% endblock %}
 {% block content %}
@@ -46,10 +51,15 @@
                         {% endfor %}</p>
                     <p>Status: {{ task.status.name }}</p>
                     {% if request.user.is_authenticated %}
-                    {% if perms.auth.add_user and request.user in project.author.all %}
+
+                    {% if perms.webapp.change_task and request.user in project.author.all %}
                       <a href="{% url 'webapp:task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+                    {% endif %}
+
+                    {% if perms.webapp.delete_task and request.user in project.author.all %}
                       <a href="{% url 'webapp:task_delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
                     {% endif %}
+
                     {% endif %}
 
                   </div>
