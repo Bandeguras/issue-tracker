@@ -2,11 +2,10 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-from django.urls import reverse
-from django.views.generic import CreateView, UpdateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from accounts.form import MyUserCreationForm
-from webapp.form import ProjectForm
 from webapp.models import Project
 
 
@@ -38,3 +37,12 @@ class UserAdd(PermissionRequiredMixin, UpdateView):
     def has_permission(self):
         if self.request.user in self.get_object().author.all():
             return self.request.user.has_perm('auth.add_user')
+
+
+class UserDelete(PermissionRequiredMixin, DeleteView):
+    model = User
+    success_url = reverse_lazy('webapp:project_index')
+    permission_required = 'auth.delete_user'
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
