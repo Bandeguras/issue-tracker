@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -28,7 +29,12 @@ class RegisterView(CreateView):
         return next_url
 
 
-class UserAdd(UpdateView):
+class UserAdd(PermissionRequiredMixin, UpdateView):
     model = Project
     template_name = 'user_add.html'
     fields = ['author']
+    permission_required = 'auth.add_user'
+
+    def has_permission(self):
+        if self.request.user in self.get_object().author.all():
+            return self.request.user.has_perm('auth.add_user')

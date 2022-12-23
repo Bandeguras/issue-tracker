@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block nav %}
     {% if request.user.is_authenticated %}
+    {% if perms.webapp.add_project %}
     <li class="nav-item">
           <a class="nav-link active" href="{% url 'webapp:project_create' %}">Create Project</a>
     </li>
+    {% endif %}
     {% endif %}
     <li class="nav-item">
           <a class="nav-link active" href="{% url 'webapp:task_index' %}">Task List</a>

@@ -22,8 +22,10 @@
                 {% endfor %}</p>
             <p>Status: {{ task.status.name }}</p>
               {% if request.user.is_authenticated %}
+              {% if perms.auth.add_user and request.user in task.project.author.all %}
               <a href="{% url 'webapp:task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
               <a href="{% url 'webapp:task_delete' task.pk %}" class= "btn btn-primary"><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+              {% endif %}
               {% endif %}
           </div>
         </div>
