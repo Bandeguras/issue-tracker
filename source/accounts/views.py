@@ -2,9 +2,11 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 from accounts.form import MyUserCreationForm
+from webapp.form import ProjectForm
+from webapp.models import Project
 
 
 class RegisterView(CreateView):
@@ -24,3 +26,9 @@ class RegisterView(CreateView):
         if not next_url:
             next_url = reverse('index')
         return next_url
+
+
+class UserAdd(UpdateView):
+    model = Project
+    template_name = 'user_add.html'
+    fields = ['author']

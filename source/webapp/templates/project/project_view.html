@@ -4,6 +4,9 @@
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'webapp:task_create'  project.pk %}">Create Task</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'accounts:user_add'  project.pk %}">Add developer+</a>
+    </li>
     {% endif %}
 {% endblock %}
 {% block content %}
@@ -17,6 +20,9 @@
                 </div>
             {% endif %}
         </div>
+        {% for developer in project.author.all %}
+            <p>Developer: {{ developer }}</p>
+        {% endfor %}
         <p>Description: {{ project.description }}</p>
         <p>Created-At: {{ project.created_at }}</p>
         <p>Expiration-At: {{ project.expiration_at }}</p>

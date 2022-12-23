@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
@@ -31,6 +32,7 @@ class Status(models.Model):
 
 
 class Project(models.Model):
+    author = models.ManyToManyField(get_user_model(), default=1, related_name='projects', verbose_name='Автор')
     created_at = models.DateField(verbose_name="Время создания")
     expiration_at = models.DateField(verbose_name="Время изменения", null=True, blank=True)
     summary = models.CharField(max_length=30, verbose_name="Заголовок")
