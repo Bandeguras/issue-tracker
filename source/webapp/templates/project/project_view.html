@@ -46,8 +46,6 @@
                 <div class="card">
                   <div class="card-body" style="font-weight: bold">
                     <h2><a href="{% url 'webapp:task' task.pk %}" style="text-decoration: none">{{ task.summary }} </a></h2>
-                    <p>Author: {{ task.author }}</p>
-
                     <p>Type: {% for type in task.type.all%}
                         {{type.name }}
                         {% if not forloop.last %}, {% endif %}
