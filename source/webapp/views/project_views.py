@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 
+
 from webapp.models import Project
 from webapp.form import ProjectForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -24,6 +25,11 @@ class ProjectCreate(PermissionRequiredMixin, CreateView):
     form_class = ProjectForm
     permission_required = 'webapp.add_project'
 
+    def form_valid(self, form):
+        form.save()
+        form.instance.author.add(self.request.user.pk)
+        return super().form_valid(form)
+
 
 class ProjectUpdate(PermissionRequiredMixin, UpdateView):
     model = Project
@@ -31,6 +37,7 @@ class ProjectUpdate(PermissionRequiredMixin, UpdateView):
     form_class = ProjectForm
     context_object_name = "projects"
     permission_required = 'webapp.change_project'
+
 
 
 

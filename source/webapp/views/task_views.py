@@ -66,7 +66,8 @@ class TaskCreate(PermissionRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def has_permission(self):
-        return super().has_permission() and self.request.user in self.get_object().project.author.all()
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        return super().has_permission() and self.request.user in project.author.all()
 
 
 class TaskUpdate(PermissionRequiredMixin, UpdateView):
