@@ -21,4 +21,5 @@
             </div>
         </div>
     </div>
+    {% include 'partial/project_list_partial.html' with projects=user_obj.projects.all %}
 {% endblock %}

@@ -31,7 +31,7 @@
         </div>
         {% for developer in project.author.all %}
             <div class="d-flex">
-            <p>Developer: {{ developer }}</p>{% if perms.auth.add_user and request.user in project.author.all %}
+            <p>Developer: <a href="{% url 'accounts:user_view' developer.pk %}">{{ developer }}</a></p>{% if perms.auth.add_user and request.user in project.author.all %}
                 <a href="{% url 'accounts:user_delete' developer.pk %}"class= "btn btn-primary mx-2"><i class="bi bi-trash "></i></a>{% endif %}
             </div>
         {% endfor %}
