@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 style="text-align: center">Users <i class="bi bi-bookmark-check"></i></h1>
+    <div class="row">
+    {% for developer in user_list %}
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body" style="font-weight: bold">
+              <h2><a href="{% url 'accounts:user_view' developer.pk %}">{{ developer.username }}</a></h2>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+{% endblock %}

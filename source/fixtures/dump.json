@@ -46,6 +46,21 @@
     }
 },
 {
+    "model": "webapp.task",
+    "pk": 11,
+    "fields": {
+        "summary": "Create Delete Method",
+        "description": "asdadasdasdasdas",
+        "status": 2,
+        "created_at": "2022-12-25T14:01:34.992Z",
+        "updated_at": "2022-12-25T14:01:34.992Z",
+        "project": 3,
+        "type": [
+            1
+        ]
+    }
+},
+{
     "model": "webapp.type",
     "pk": 1,
     "fields": {
@@ -118,13 +133,17 @@
 },
 {
     "model": "webapp.project",
-    "pk": 4,
+    "pk": 5,
     "fields": {
         "created_at": "2022-01-01",
         "expiration_at": null,
-        "summary": "s",
-        "description": "7678768768",
-        "author": []
+        "summary": "Youtube",
+        "description": "asdasfasfasfasf",
+        "author": [
+            1,
+            4,
+            5
+        ]
     }
 }
 ]

@@ -2,7 +2,7 @@ from django.contrib.auth import login, get_user_model
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 
 from accounts.form import MyUserCreationForm
 from .models import Profile
@@ -53,3 +53,12 @@ class UserView(DetailView):
     template_name = 'user_view.html'
     model = get_user_model()
     context_object_name = 'user_obj'
+
+
+class UserIndex(PermissionRequiredMixin, ListView):
+    template_name = 'user_index.html'
+    model = get_user_model()
+    context_object_name = 'user_list'
+    permission_required = 'accounts.view_profile'
+
+
