@@ -1,21 +1,22 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 
 from accounts.form import MyUserCreationForm
+from .models import Profile
 from webapp.models import Project
 
 
 class RegisterView(CreateView):
-    model = User
+    model = get_user_model()
     template_name = 'user_create.html'
     form_class = MyUserCreationForm
 
     def form_valid(self, form):
         user = form.save()
+        Profile.objects.create(user=user)
         login(self.request, user)
         return redirect(self.get_success_url())
 
@@ -40,9 +41,15 @@ class UserAdd(PermissionRequiredMixin, UpdateView):
 
 
 class UserDelete(PermissionRequiredMixin, DeleteView):
-    model = User
+    model = get_user_model()
     success_url = reverse_lazy('webapp:project_index')
     permission_required = 'auth.delete_user'
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+
+class UserView(DetailView):
+    template_name = 'user_view.html'
+    model = get_user_model()
+    context_object_name = 'user_obj'
