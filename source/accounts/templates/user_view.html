@@ -16,10 +16,11 @@
                     <p class="card-text">LastName: {{ user_obj.last_name }}</p>
                     <p class="card-text">Email: {{ user_obj.email }}</p>
                     <p class="card-text">description: {{ user_obj.profile.description }}</p>
-                    <p class="card-text">Github: <a href="{{ user_obj.profile.git }}">{{ user_obj.profile.git }}</a></p>
+                    <p class="card-text" style="text-decoration: none">Github: <a href="{{ user_obj.profile.git }}">{{ user_obj.profile.git }}</a></p>
                 </div>
             </div>
         </div>
     </div>
-    {% include 'partial/project_list_partial.html' with projects=user_obj.projects.all %}
+    {% include 'partial/project_list_partial.html' with projects=object_list %}
+
 {% endblock %}

@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
+from django.views.generic.list import MultipleObjectMixin
 
 from accounts.form import MyUserCreationForm
 from .models import Profile
@@ -49,10 +50,15 @@ class UserDelete(PermissionRequiredMixin, DeleteView):
         return self.delete(request, *args, **kwargs)
 
 
-class UserView(DetailView):
+class UserView(DetailView,  MultipleObjectMixin):
     template_name = 'user_view.html'
     model = get_user_model()
     context_object_name = 'user_obj'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        projects = self.get_object().projects.all()
+        return super().get_context_data(object_list=projects, **kwargs)
 
 
 class UserIndex(PermissionRequiredMixin, ListView):

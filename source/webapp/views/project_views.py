@@ -11,6 +11,7 @@ class ProjectIndex(ListView):
     template_name = 'project/index.html'
     context_object_name = 'projects'
     model = Project
+    paginate_by = 5
 
 
 class ProjectView(PermissionRequiredMixin, DetailView):
