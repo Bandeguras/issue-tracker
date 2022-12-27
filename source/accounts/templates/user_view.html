@@ -16,7 +16,9 @@
                     <p class="card-text">LastName: {{ user_obj.last_name }}</p>
                     <p class="card-text">Email: {{ user_obj.email }}</p>
                     <p class="card-text">description: {{ user_obj.profile.description }}</p>
+                    {% if user_obj.profile.git %}
                     <p class="card-text" style="text-decoration: none">Github: <a href="{{ user_obj.profile.git }}">{{ user_obj.profile.git }}</a></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
