@@ -5,7 +5,7 @@
     "fields": {
         "user": 1,
         "avatar": "",
-        "git": "https://github.com/Bandeguras",
+        "git": "https://github.com/admin",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
     }
 },
@@ -15,7 +15,7 @@
     "fields": {
         "user": 3,
         "avatar": "",
-        "git": "https://github.com/Bandeguras",
+        "git": "https://github.com/developer1",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
     }
 },
@@ -25,7 +25,7 @@
     "fields": {
         "user": 4,
         "avatar": "",
-        "git": "https://github.com/Bandeguras",
+        "git": "https://github.com/projectmanager1",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
     }
 },
@@ -35,17 +35,67 @@
     "fields": {
         "user": 5,
         "avatar": "",
-        "git": null,
+        "git": "https://github.com/teamlead1",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
     }
 },
 {
     "model": "accounts.profile",
-    "pk": 5,
+    "pk": 6,
     "fields": {
-        "user": 6,
+        "user": 7,
         "avatar": "",
-        "git": "https://github.com/Bandeguras",
+        "git": "https://github.com/user",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
+    }
+},
+{
+    "model": "accounts.profile",
+    "pk": 7,
+    "fields": {
+        "user": 8,
+        "avatar": "",
+        "git": "https://github.com/developer2",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
+    }
+},
+{
+    "model": "accounts.profile",
+    "pk": 8,
+    "fields": {
+        "user": 9,
+        "avatar": "",
+        "git": "https://github.com/teamlead2",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
+    }
+},
+{
+    "model": "accounts.profile",
+    "pk": 9,
+    "fields": {
+        "user": 10,
+        "avatar": "",
+        "git": "https://github.com/teamlead3",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
+    }
+},
+{
+    "model": "accounts.profile",
+    "pk": 10,
+    "fields": {
+        "user": 11,
+        "avatar": "",
+        "git": "https://github.com/projectmanager2",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
+    }
+},
+{
+    "model": "accounts.profile",
+    "pk": 11,
+    "fields": {
+        "user": 12,
+        "avatar": "",
+        "git": "https://github.com/projectmanager3",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised"
     }
 },
@@ -156,13 +206,14 @@
     "model": "webapp.project",
     "pk": 1,
     "fields": {
-        "created_at": "2022-12-05",
-        "expiration_at": null,
+        "created_at": "2023-12-05",
+        "expiration_at": "2023-12-21",
         "summary": "Youtube",
         "description": "create delete method with validation",
         "author": [
+            1,
             4,
-            6
+            5
         ]
     }
 },
@@ -175,9 +226,7 @@
         "summary": "Telegram",
         "description": "AIOASJDFNASMFNASFASF",
         "author": [
-            3,
-            4,
-            6
+            1
         ]
     }
 },
@@ -191,6 +240,7 @@
         "description": "asdasfasfasfasf",
         "author": [
             1,
+            3,
             4,
             5
         ]

@@ -40,3 +40,6 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('webapp:project', kwargs={'pk': self.pk})
+
+    class Meta:
+        permissions = [('add_user_in_project', 'Добавить пользователя в проект'), ]

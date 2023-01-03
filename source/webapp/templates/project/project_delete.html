@@ -5,10 +5,10 @@
 {% block content %}
     <form method="POST" action="" class="text-center" style="color: black">
         <h1>Are you sure want to delete task </h1>
-        <h2>Summary: {{ project.summary }}</h2>
-        <p>Description: {{ project.description }}</p>
+        <h2>Summary: {{ projects.summary }}</h2>
+        <p>Description: {{ projects.description }}</p>
         {% csrf_token %}
         <input class="btn" style="border:solid 2px black" type="submit" value="Yes" >
-        <a style="border:solid 2px black" href="{% url "webapp:project" project.pk %}" class="btn rounded text-decoration-none link-dark">No</a>
+        <a style="border:solid 2px black" href="{% url "webapp:project" projects.pk %}" class="btn rounded text-decoration-none link-dark">No</a>
     </form>
 {% endblock %}

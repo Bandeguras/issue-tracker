@@ -1,11 +1,10 @@
-from django.contrib.auth import login, get_user_model
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.shortcuts import redirect
-from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
-
-from accounts.form import MyUserCreationForm
+from django.contrib.auth import login, get_user_model
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.shortcuts import redirect
+from django.urls import reverse
+from .form import MyUserCreationForm
 from webapp.form import ChangeUserProjectForm
 from .models import Profile
 from webapp.models import Project
@@ -27,7 +26,7 @@ class RegisterView(CreateView):
         if not next_url:
             next_url = self.request.POST.get('next')
         if not next_url:
-            next_url = reverse('index')
+            next_url = reverse('webapp:project:index')
         return next_url
 
 
@@ -35,7 +34,7 @@ class UserChangeProjectView(PermissionRequiredMixin, UpdateView):
     model = Project
     template_name = 'user_add.html'
     form_class = ChangeUserProjectForm
-    permission_required = 'accounts.add_profile'
+    permission_required = 'webapp.add_user_in_project'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -43,11 +42,10 @@ class UserChangeProjectView(PermissionRequiredMixin, UpdateView):
         return kwargs
 
     def has_permission(self):
-        if self.request.user in self.get_object().author.all():
-            return self.request.user.has_perm('accounts.add_profile')
+        return super().has_permission() and self.request.user in self.get_object().author.all()
 
 
-class UserView(DetailView,  MultipleObjectMixin):
+class UserView(LoginRequiredMixin, DetailView,  MultipleObjectMixin):
     template_name = 'user_view.html'
     model = get_user_model()
     context_object_name = 'user_obj'
@@ -62,6 +60,4 @@ class UserIndex(PermissionRequiredMixin, ListView):
     template_name = 'user_index.html'
     model = get_user_model()
     context_object_name = 'user_list'
-    permission_required = 'accounts.view_profile'
-
-
+    permission_required = 'accounts.user_list_view'

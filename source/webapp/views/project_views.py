@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.urls import reverse_lazy
 
 
@@ -14,10 +14,9 @@ class ProjectIndex(ListView):
     paginate_by = 5
 
 
-class ProjectView(PermissionRequiredMixin, DetailView):
+class ProjectView(LoginRequiredMixin, DetailView):
     template_name = 'project/project_view.html'
     model = Project
-    permission_required = 'webapp.view_project'
 
 
 class ProjectCreate(PermissionRequiredMixin, CreateView):
@@ -43,7 +42,7 @@ class ProjectUpdate(PermissionRequiredMixin, UpdateView):
 class ProjectDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'project/project_delete.html'
     model = Project
-    context_object_name = "project"
+    context_object_name = "projects"
     permission_required = 'webapp.delete_project'
     success_url = reverse_lazy('webapp:project_index')
 

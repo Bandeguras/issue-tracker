@@ -8,7 +8,7 @@
     </li>
     {% endif %}
 
-    {% if perms.accounts.add_profile and request.user in project.author.all %}
+    {% if perms.webapp.add_user_in_project and request.user in project.author.all %}
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'accounts:user_add'  project.pk %}">Add developer+</a>
     </li>
@@ -19,24 +19,22 @@
 {% block content %}
     <div style="font-weight: bold " class="border border-4 border-dark p-4">
         <div class="d-flex">
-        <h1>Summary: {{ project.summary }}</h1>
+            <h1>Summary: {{ project.summary }}</h1>
             {% if request.user.is_authenticated %}
-            {% if perms.auth.add_user and request.user in project.author.all %}
+            {% if perms.webapp.change_project and request.user in project.author.all %}
                 <div class="ms-auto">
-                <a href="{% url 'webapp:project_update' project.pk%}"class= "btn btn-primary "><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
-                <a href="{% url 'webapp:project_delete' project.pk%}"class= "btn btn-primary "><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
+                <a href="{% url 'webapp:project_update' project.pk%}" class= "btn btn-primary "><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+                <a href="{% url 'webapp:project_delete' project.pk%}" class= "btn btn-primary "><i class="bi bi-trash mx-2" style="font-size:25px"></i></a>
                 </div>
             {% endif %}
             {% endif %}
         </div>
-        {% for developer in project.author.all %}
-            <div class="d-flex">
-            <p>Developer: <a href="{% url 'accounts:user_view' developer.pk %}">{{ developer }}</a></p>
-            </div>
-        {% endfor %}
+        <p>Developer: {% for developer in project.author.all %}<a href="{% url 'accounts:user_view' developer.pk %}">{{ developer }}{% if not forloop.last %}, {% endif %}{% endfor %}</a></p>
         <p>Description: {{ project.description }}</p>
         <p>Created-At: {{ project.created_at }}</p>
-        <p>Expiration-At: {{ project.expiration_at }}</p>
+        {% if project.expiration_at%}
+            <p>Expiration-At: {{ project.expiration_at }}</p>
+        {% endif %}
 
         <h2 style="text-align: center">Tasks</h2>
         <div class="row">
@@ -53,7 +51,7 @@
                     {% if request.user.is_authenticated %}
 
                     {% if perms.webapp.change_task and request.user in project.author.all %}
-                      <a href="{% url 'webapp:task_update' task.pk%}"class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+                      <a href="{% url 'webapp:task_update' task.pk%}" class= "btn btn-primary"><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
                     {% endif %}
 
                     {% if perms.webapp.delete_task and request.user in project.author.all %}

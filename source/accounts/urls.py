@@ -1,5 +1,4 @@
 from django.urls import path
-
 from accounts.views import RegisterView, UserChangeProjectView, UserView, UserIndex
 from django.contrib.auth.views import LoginView, LogoutView
 
@@ -12,6 +11,4 @@ urlpatterns = [
     path('project/user_add/<int:pk>/', UserChangeProjectView.as_view(), name='user_add'),
     path('<int:pk>/', UserView.as_view(), name='user_view'),
     path('users/', UserIndex.as_view(), name='user_index'),
-
 ]
-

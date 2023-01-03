@@ -1,5 +1,3 @@
-from urllib.parse import urlparse
-
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -17,4 +15,4 @@ class Profile(models.Model):
         db_table = 'profile'
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
-
+        permissions = [('user_list_view', 'Просмотр всех пользователей'), ]

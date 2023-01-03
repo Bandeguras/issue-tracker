@@ -10,7 +10,7 @@ from webapp.form import TaskForm, SearchForm
 # Create your views here.
 
 
-class TaskIndex(ListView):
+class TaskIndex(LoginRequiredMixin, ListView):
     template_name = 'task/index.html'
     context_object_name = 'tasks'
     model = Task
@@ -45,10 +45,9 @@ class TaskIndex(ListView):
         return context
 
 
-class TaskView(PermissionRequiredMixin, DetailView):
+class TaskView(LoginRequiredMixin, DetailView):
     template_name = 'task/task_view.html'
     model = Task
-    permission_required = 'webapp.view_task'
 
 
 class TaskCreate(PermissionRequiredMixin, CreateView):
