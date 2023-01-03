@@ -6,6 +6,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, DetailView,
 from django.views.generic.list import MultipleObjectMixin
 
 from accounts.form import MyUserCreationForm
+from webapp.form import ChangeUserProjectForm
 from .models import Profile
 from webapp.models import Project
 
@@ -30,24 +31,20 @@ class RegisterView(CreateView):
         return next_url
 
 
-class UserAdd(PermissionRequiredMixin, UpdateView):
+class UserChangeProjectView(PermissionRequiredMixin, UpdateView):
     model = Project
     template_name = 'user_add.html'
-    fields = ['author']
-    permission_required = 'auth.add_user'
+    form_class = ChangeUserProjectForm
+    permission_required = 'accounts.add_profile'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def has_permission(self):
         if self.request.user in self.get_object().author.all():
-            return self.request.user.has_perm('auth.add_user')
-
-
-class UserDelete(PermissionRequiredMixin, DeleteView):
-    model = get_user_model()
-    success_url = reverse_lazy('webapp:project_index')
-    permission_required = 'auth.delete_user'
-
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
+            return self.request.user.has_perm('accounts.add_profile')
 
 
 class UserView(DetailView,  MultipleObjectMixin):

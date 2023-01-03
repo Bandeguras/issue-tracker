@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth import get_user_model
+
 from webapp.models import Task, Project
 from django.forms import widgets, ValidationError
 
@@ -12,6 +14,25 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = ['summary', 'description', 'created_at', 'expiration_at']
         widgets = {'created_at': widgets.SelectDateWidget, 'expiration_at': widgets.SelectDateWidget}
+
+
+class ChangeUserProjectForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        self.fields['author'].queryset = get_user_model().objects.exclude(pk=self.user.pk)
+
+    class Meta:
+        model = Project
+        fields = ['author']
+        widgets = {'author': widgets.CheckboxSelectMultiple}
+
+    def save(self, commit=True):
+        project = super().save(commit=commit)
+        if commit:
+            project.author.add(self.user)
+            project.save()
+        return project
 
 
 class TaskForm(forms.ModelForm):

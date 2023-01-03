@@ -8,7 +8,7 @@
     </li>
     {% endif %}
 
-    {% if perms.auth.add_user and request.user in project.author.all %}
+    {% if perms.accounts.add_profile and request.user in project.author.all %}
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'accounts:user_add'  project.pk %}">Add developer+</a>
     </li>
@@ -31,8 +31,7 @@
         </div>
         {% for developer in project.author.all %}
             <div class="d-flex">
-            <p>Developer: <a href="{% url 'accounts:user_view' developer.pk %}">{{ developer }}</a></p>{% if perms.auth.add_user and request.user in project.author.all %}
-                <a href="{% url 'accounts:user_delete' developer.pk %}"class= "btn btn-primary mx-2"><i class="bi bi-trash "></i></a>{% endif %}
+            <p>Developer: <a href="{% url 'accounts:user_view' developer.pk %}">{{ developer }}</a></p>
             </div>
         {% endfor %}
         <p>Description: {{ project.description }}</p>

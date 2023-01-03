@@ -40,9 +40,6 @@ class ProjectUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'webapp.change_project'
 
 
-
-
-
 class ProjectDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'project/project_delete.html'
     model = Project

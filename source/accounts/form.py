@@ -22,3 +22,5 @@ class MyUserCreationForm(UserCreationForm):
         if email == '':
             raise ValidationError('Email is required')
         return email
+
+
