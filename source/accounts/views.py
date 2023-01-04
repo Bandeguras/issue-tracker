@@ -1,10 +1,11 @@
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth import login, get_user_model
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from .form import MyUserCreationForm
+from .form import MyUserCreationForm, UserChangeForm, ProfileChangeForm
 from webapp.form import ChangeUserProjectForm
 from .models import Profile
 from webapp.models import Project
@@ -56,8 +57,53 @@ class UserView(LoginRequiredMixin, DetailView,  MultipleObjectMixin):
         return super().get_context_data(object_list=projects, **kwargs)
 
 
-class UserIndex(PermissionRequiredMixin, ListView):
+class UserList(PermissionRequiredMixin, ListView):
     template_name = 'user_index.html'
     model = get_user_model()
     context_object_name = 'user_list'
     permission_required = 'accounts.user_list_view'
+
+
+class UserChangeView(LoginRequiredMixin, UpdateView):
+    model = get_user_model()
+    form_class = UserChangeForm
+    template_name = 'user_change.html'
+    context_object_name = 'user_obj'
+    form_class_profile = ProfileChangeForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'profile_form' not in kwargs:
+            context['profile_form'] = self.form_class_profile(instance=self.get_object().profile)
+        return context
+
+    def get_success_url(self):
+        return reverse('accounts:user_view', kwargs={'pk': self.get_object().pk})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        profile_form = self.form_class_profile(instance=self.get_object().profile, data=request.POST, files=request.FILES)
+        if form.is_valid() and profile_form.is_valid():
+            return self.form_valid(form, profile_form)
+        else:
+            return self.form_valid(form, profile_form)
+
+    def form_valid(self, form, profile_form):
+        response = super().form_valid(form)
+        profile_form.save()
+        return response
+
+    def form_invalid(self, form, profile_form):
+        return self.render_to_response(self.get_context_data(form=form, profile_form=profile_form))
+
+
+class UserChangePasswordView(PasswordChangeView):
+    template_name = 'user_change_password.html'
+
+    def get_success_url(self):
+        return reverse('accounts:user_view', kwargs={'pk': self.request.user.pk})
+

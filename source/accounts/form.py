@@ -1,11 +1,13 @@
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
+from accounts.models import Profile
+from django import forms
 
 
 class MyUserCreationForm(UserCreationForm):
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ['username', 'password1', 'password2',
                   'first_name', 'last_name', 'email']
         field_classes = {'username': UsernameField}
@@ -21,3 +23,16 @@ class MyUserCreationForm(UserCreationForm):
         if email == '':
             raise ValidationError('Email is required')
         return email
+
+
+class UserChangeForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'email']
+
+
+class ProfileChangeForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['avatar', 'git', 'description']
+        labels = {'avatar': 'Avatar', 'git': 'GitHub', 'description': 'About me'}

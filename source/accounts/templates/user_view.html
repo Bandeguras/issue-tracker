@@ -5,13 +5,25 @@
     <div class="card mb-3">
         <div class="row g-0">
             {% if user_obj.profile.avatar %}
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <img src="{{ user_obj.profile.avatar.url }}" class="img-fluid rounded-start w-75">
                 </div>
             {% endif %}
-            <div class="col-md-8">
+            {% if not user_obj.profile.avatar %}
+            <div class="col-md-16">
+            {% else %}
+            <div class="col-md-9">
+            {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title">Username {{ user_obj.username }}</h5>
+                     <div class="d-flex">
+                         <h1>Summary: {{ user_obj }}</h1>
+                         {% if user_obj.pk == request.user.pk %}
+                         <div class="ms-auto">
+                         <a href="{% url 'accounts:user_update_profile' %}" class= "btn btn-primary "><i class="bi bi-pencil mx-2" style="font-size:25px"></i></a>
+                         <a href="{% url 'accounts:user_change_password' %}" class= "btn btn-primary "><i class="bi bi-shield-fill-check mx-2" style="font-size:25px"></i></a>
+                         </div>
+                         {% endif %}
+                    </div>
                     <p class="card-text">FirstName: {{ user_obj.first_name }}</p>
                     <p class="card-text">LastName: {{ user_obj.last_name }}</p>
                     <p class="card-text">Email: {{ user_obj.email }}</p>
