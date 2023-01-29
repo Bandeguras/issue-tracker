@@ -4,9 +4,9 @@
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body" style="font-weight: bold">
-             <h2><a href="{% url 'webapp:project' project.pk %}" style="text-decoration: none">{{ project.summary }} </a></h2>
+            <h2><a href="{% url 'webapp:project' project.pk %}" style="text-decoration: none">{{ project.summary }} </a></h2>
+            <button id="button" data-like-value="{% url 'webapp:project_like' project.pk %}"><i class="bi bi-hand-thumbs-up"></i></button>
             <p>{{ project.description }}</p>
-              <a href=""></a>
           </div>
         </div>
       </div>

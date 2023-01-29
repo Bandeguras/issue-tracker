@@ -1,10 +1,25 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-
-
 from webapp.models import Project
 from webapp.form import ProjectForm
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.http import JsonResponse
+
+
+class ProjectsLikes(View):
+    def get(self, request, *args, **kwargs):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+
+        data = {
+            'like': project.likes.all().count(),
+        }
+
+        response = JsonResponse(data)
+        print(project.likes.all().count())
+
+        return response
+
 
 
 class ProjectIndex(ListView):
